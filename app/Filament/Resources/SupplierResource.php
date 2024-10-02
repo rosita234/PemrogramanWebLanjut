@@ -23,11 +23,13 @@ class SupplierResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextArea::make('kd_Supplier')
+                Forms\Components\TextInput::make('kd_supplier')
                 ->label('Kode Supplier')
+                ->maxLength(5)
                 ->required(),
-                Forms\Components\Date::make('nama_supplier')
+                Forms\Components\TextInput::make('nama_supplier')
                 ->label('Nama Supplier')
+                ->maxLength(30)
                 ->required(),
                 Forms\Components\TextArea::make('alamat')
                 ->label('Alamat'),   

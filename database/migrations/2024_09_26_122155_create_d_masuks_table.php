@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('d_masuks', function (Blueprint $table) {
-            $table->id('id_masuk');
-            $table->char('kd_masuk', 4);
-            $table->char('kd_barang', 4);
-            $table->integer('jumlah');
-            $table->decimal('harga_beli', 8, 2);
-            $table->decimal('subtotal', 8, 2);
+            $table->id()->primary();
+            $table->char("kd_masuk", length:5);
+            $table->char("kd_barang", length:5);
+            $table->integer("jumlah");
+            $table->decimal("harga_beli");
+            $table->decimal("subtotal");
+            $table->timestamps();
         });
     }
 

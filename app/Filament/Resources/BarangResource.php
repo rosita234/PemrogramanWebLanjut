@@ -23,8 +23,9 @@ class BarangResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextArea::make('kd_barang')
+                Forms\Components\TextInput::make('kd_barang')
                 ->label('Kode Barang')
+                ->maxLength(5)
                 ->required(),
                 Forms\Components\Select::make('satuan')
                 ->label('Satuan')
@@ -34,24 +35,23 @@ class BarangResource extends Resource
                     'Lusin' => 'Lusin',
                 ])
                 ->required(),
-                Forms\Components\TextArea::make('nama_barang')
+                Forms\Components\TextInput::make('nama_barang')
                 ->label('Nama Barang')
                 ->required(),
-                Forms\Components\TextArea::make('harga_jual')
+                Forms\Components\TextInput::make('harga_jual')
                 ->label('Harga Jual')
                 ->required(),
-                Forms\Components\TextArea::make('harga_beli')
+                Forms\Components\TextInput::make('harga_beli')
                 ->label('Harga Beli')
                 ->required(),
-                Forms\Components\TextArea::make('stok')
+                Forms\Components\TextInput::make('stok')
                 ->label('Stok'),
-                Forms\Components\TextArea::make('status')
+                Forms\Components\Select::make('status')
                 ->label('Status')
                 ->options([
                     'Habis' => 'Habis',
                     'Ada' => 'Ada',
-                ])
-                ->required(),
+                ]),
             ]);
     }
 
@@ -64,7 +64,7 @@ class BarangResource extends Resource
                 Tables\Columns\TextColumn::make('harga_jual')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('harga_beli')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('stok')->sortable()->searchable(),
-                Tables\Columns\Select::make('status')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('status')->sortable()->searchable(),
             ])
             ->filters([
                 //

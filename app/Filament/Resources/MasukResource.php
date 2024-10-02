@@ -4,7 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MasukResource\Pages;
 use App\Filament\Resources\MasukResource\RelationManagers;
-use App\Models\Masuk;
+use App\Models\masuk;
+use App\Models\supplier;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -23,18 +24,21 @@ class MasukResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextArea::make('kd_masuk')
+                Forms\Components\TextInput::make('kd_masuk')
                 ->label('Kode Masuk')
-                ->required(),
-                Forms\Components\Date::make('tgl_masuk')
+                ->required()
+                ->maxLength(5),
+                Forms\Components\DatePicker::make('tgl_masuk')
                 ->label('Tanggal Masuk')
                 ->required(),
-                Forms\Components\TextArea::make('kd_supplier')
+                Forms\Components\Select::make('kd_supplier')
                 ->label('Kode Supplier')
+                ->options(supplier::all()->pluck('kd_supplier','kd_supplier'))
                 ->required(),   
-                Forms\Components\TextArea::make('total_masuk')
+                Forms\Components\TextInput::make('total_masuk')
                 ->label('Total Masuk')
-                ->required(),   
+                ->numeric()
+                ->disabled(),   
             ]);
     }
 
@@ -43,8 +47,8 @@ class MasukResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('kd_masuk')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('kd_supplier')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('tgl_masuk')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('kd_supplier')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('total_masuk')->sortable()->searchable(),
             ])
             ->filters([

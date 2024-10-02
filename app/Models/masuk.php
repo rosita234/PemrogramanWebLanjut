@@ -9,4 +9,5 @@ class masuk extends Model
 {
     use HasFactory;
     protected $fillable = ['kd_masuk','tgl_masuk','kd_supplier','total_masuk'];
+
 }

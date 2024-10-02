@@ -4,7 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\DMasukResource\Pages;
 use App\Filament\Resources\DMasukResource\RelationManagers;
-use App\Models\DMasuk;
+use App\Models\d_masuk;
+use App\Models\masuk;
+use App\Models\barang;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class DMasukResource extends Resource
 {
-    protected static ?string $model = DMasuk::class;
+    protected static ?string $model = d_masuk::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -23,22 +25,26 @@ class DMasukResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextArea::make('kd_masuk')
+                Forms\Components\Select::make('kd_masuk')
                 ->label('Kode Masuk')
+                ->options(masuk::all()->pluck('kd_masuk','kd_masuk'))
                 ->required(),
-                Forms\Components\TextArea::make('kd_barang')
+                Forms\Components\Select::make('kd_barang')
                 ->label('Kode Barang')
+                ->options(barang::all()->pluck('kd_barang','kd_barang'))
                 ->required(),
-                Forms\Components\TextArea::make('jumlah')
+                Forms\Components\TextInput::make('jumlah')
                 ->label('jumlah')
+                ->numeric()
                 ->required(),
-                Forms\Components\TextArea::make('subtotal')
-                ->label('Subtotal')
-                ->required(),
-                Forms\Components\TextArea::make('harga_beli')
+                Forms\Components\TextInput::make('harga_beli')
                 ->label('Harga_Beli')
+                ->numeric()
                 ->required(),
-
+                Forms\Components\TextInput::make('subtotal')
+                ->label('Subtotal')
+                ->numeric()
+                ->disabled(),
             ]);
     }
 
